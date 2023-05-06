@@ -15,7 +15,8 @@ class StockLoader:
         history_metadata_data = []
         for stock in stocks:
             history_metadata = stock.get_history_metadata(self.start_date, self.end_date)
-            history_metadata.insert(0, 'symbol', stock.symbol)
+            history_metadata = history_metadata.reset_index()
+            history_metadata['symbol'] = stock.symbol
             history_metadata_data.append(history_metadata)
 
         # Combine data into a single DataFrame
