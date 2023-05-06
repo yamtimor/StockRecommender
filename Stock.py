@@ -4,6 +4,10 @@ class Stock(yf.Ticker):
     def __init__(self, symbol):
         super().__init__(symbol)
 
+    def get_history_metadata(self, start_date, end_date):
+        history_metadata = super().history(start=start_date, end=end_date, interval='1d', actions=False)
+        return history_metadata
+
     @staticmethod
     def create_stocks(symbols):
         stocks = []
