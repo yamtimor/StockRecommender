@@ -20,5 +20,14 @@ class StockLoader:
         history_metadata_df = pd.concat(history_metadata_data)
 
         # Load data into MySQL database using SQLAlchemy
-        engine = create_engine(self.db_uri)
+        engine = create_engine(f'{db_uri}')
         history_metadata_df.to_sql('history_metadata', con=engine, if_exists='replace')
+
+
+symbols = ['AAPL', 'GOOG', 'MSFT']
+start_date = '2022-01-01'
+end_date = '2022-01-31'
+db_uri = 'mysql://root:Yam232323@localhost:3306/stock_data'
+
+loader = StockLoader(symbols, start_date, end_date, db_uri)
+loader.load_data_to_mysql()
