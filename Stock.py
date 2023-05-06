@@ -4,5 +4,10 @@ class Stock(yf.Ticker):
     def __init__(self, symbol):
         super().__init__(symbol)
 
-stock = Stock("MSFT")
-actions = stock.actions
+    @staticmethod
+    def create_stocks(symbols):
+        stocks = []
+        for symbol in symbols:
+            stock = Stock(symbol)
+            stocks.append(stock)
+        return stocks
