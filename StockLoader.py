@@ -14,12 +14,13 @@ class StockLoader:
         stocks = Stock.create_stocks(self.symbols)
         history_metadata_data = []
         for stock in stocks:
-            history_metadata_data.append(stock.get_history_metadata(self.start_date, self.end_date))
+            history_metadata = stock.get_history_metadata(self.start_date, self.end_date)
+            history_metadata.insert(0, 'symbol', stock.symbol)
+            history_metadata_data.append(history_metadata)
 
         # Combine data into a single DataFrame
         history_metadata_df = pd.concat(history_metadata_data)
 
         # Load data into MySQL database using SQLAlchemy
-        engine = create_engine(f'{db_uri}')
-        history_metadata_df.to_sql('history_metadata', con=engine, if_exists='replace')
-
+        engine = create_engine(f'{self.db_uri}')
+        history_metadata_df.to_sql('history_metadata', con=engine, if_exists='replace', index=False)
