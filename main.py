@@ -1,9 +1,16 @@
 from StockLoader import StockLoader
+import yaml
 
-symbols = ['AAPL', 'GOOG', 'MSFT']
-start_date = '2023-01-01'
-end_date = '2023-05-01'
-db_uri = 'mysql://root:Yam232323@localhost:3306/stock_data'
+
+# Load the configuration file
+with open('config.yml', 'r') as f:
+    config = yaml.safe_load(f)
+
+symbols = config['symbols']
+start_date = config['start_date']
+end_date = config['end_date']
+db_config = config['db_config']
+db_uri = f"mysql://{db_config['username']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}"
 
 loader = StockLoader(symbols, start_date, end_date, db_uri)
 loader.load_data_to_mysql()
