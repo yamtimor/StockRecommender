@@ -1,6 +1,12 @@
 import yfinance as yf
 
 class Stock(yf.Ticker):
+    """
+    Stock class
+        Attributes:
+            symbol (str): stock symbol
+    """
+
     def __init__(self, symbol):
         super().__init__(symbol)
         self.symbol = symbol
