@@ -2,6 +2,10 @@ from StockLoader import StockLoader
 import yaml
 
 def main():
+    """
+    Main function
+    """
+
     # Load the configuration file
     with open('config.yml', 'r') as f:
         config = yaml.safe_load(f)
