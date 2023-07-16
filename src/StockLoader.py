@@ -3,6 +3,11 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 class StockLoader:
+    """
+    Loads data from Yahoo Finance API and stores it in a MySQL database.
+    """
+
+
     def __init__(self, symbols, start_date, end_date, db_uri):
         self.symbols = symbols
         self.start_date = start_date
@@ -10,6 +15,11 @@ class StockLoader:
         self.db_uri = db_uri
 
     def load_data_to_mysql(self):
+        """
+            Loads data from Yahoo Finance API and stores it in a MySQL database.
+        :return:
+        """
+
         # Load data from Yahoo Finance API
         stocks = Stock.create_stocks(self.symbols)
         history_metadata_data = []
